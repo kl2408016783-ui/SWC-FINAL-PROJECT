@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fafafa;
+            text-align: center;
+			 background: linear-gradient(to bottom right, #4facfe, #00f2fe);
+			display: flex;
+			height: 100vh;
+        }
+
+        .checkout-box {
+            width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .item-row {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .payment-options {
+            margin-top: 20px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .confirm-btn {
+            padding: 12px;
+            background: #28a745;
+            color: white;
+            border-radius: 8px;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-btn {
+            display: block;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="checkout-box">
+    <h2>Checkout</h2>
+
+    <div id="checkout-list"></div>
+
+    <div id="total-price" class="total"></div>
+
+    <!-- Payment Options -->
+    <div class="payment-options">
+        <p><strong>Select Payment Method:</strong></p>
+        <label><input type="radio" name="payment" value="Visa"> Visa</label><br>
+        <label><input type="radio" name="payment" value="PayPal"> PayPal</label>
+    </div>
+
+    <button class="confirm-btn" onclick="saveOrder()">Confirm Checkout</button>
+
+    <a href="cart.html" class="back-btn">← Back to Cart</a>
+</div>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const listDiv = document.getElementById("checkout-list");
+    const totalDiv = document.getElementById("total-price");
+
+    // Show cart items
+    if (cart.length === 0) {
+        listDiv.innerHTML = "<p>Your cart is empty.</p>";
+        totalDiv.textContent = "";
+    } else {
+        let total = 0;
+
+        cart.forEach(item => {
+           listDiv.innerHTML += `
+    <div class="item-row">
+        ${item.productName} (x${item.quantity}) — RM${(item.productPrice * item.quantity).toFixed(2)}
+    </div>
+
+
+            `;
+            total += item.productPrice * item.quantity;
+        });
+
+        totalDiv.textContent = "Total: RM " + total.toFixed(2);
+    }
+
+    /* ---------------------------
+       SAVE ORDER TO localStorage
+    ---------------------------- */
+    function saveOrder() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    const paymentMethod = document.querySelector('input[name="payment"]:checked');
+    if (!paymentMethod) {
+        alert("Please select a payment method!");
+        return;
+    }
+
+    cart.forEach(item => {
+        const formData = new FormData();
+        formData.append("productName", item.productName);
+        formData.append("productPrice", item.productPrice);
+        formData.append("quantity", item.quantity);
+        formData.append("total", (item.productPrice * item.quantity).toFixed(2));
+        formData.append("date", new Date().toLocaleString());
+        formData.append("payment", paymentMethod.value);
+
+        fetch("http://localhost/ecommerce/save_order.php", {
+            method: "POST",
+            body: formData
+        });
+    });
+
+    alert("Order saved to database!");
+    localStorage.removeItem("cart");
+    window.location.href = "index.html";
+}
+
+
+</script>
+
+</body>
+</html>
+
