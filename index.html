@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cheer House Official</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+    }
+
+    /* Header Title */
+    h1 {
+        text-align: center;
+        background: #333;
+        color: white;
+        padding: 18px 0;
+        margin: 0;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+        background: #444;
+        padding: 10px;
+        text-align: center;
+    }
+    .navbar a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .navbar a:hover {
+        color: #ffd700;
+    }
+
+    /* Banner */
+    .banner img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Product Section */
+    .product-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .product {
+        background: #fff;
+        width: 250px;
+        border-radius: 8px;
+        padding-bottom: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform .2s;
+    }
+    .product:hover {
+        transform: scale(1.04);
+    }
+
+    .product img {
+        width: 100%;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .product button {
+        background: #333;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-size: 16px;
+    }
+    .product button:hover {
+        background: #555;
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>Welcome to Cheer House Merchandise Store!</h1>
+
+<!-- Navigation -->
+<div class="navbar">
+    <a href="index.html">Home</a>
+    <a id="cart-count" href="cart.html">Cart</a>
+    <a href="create_account.html">Account</a>
+    <a href="about_us.html">About Us</a>
+</div>
+
+<!-- Banner -->
+<div class="banner">
+    <img src="Banner and logo.jpg" alt="Shop Banner">
+</div>
+
+<!-- Product List -->
+<div class="product-container">
+
+    <div class="product">
+        <img src="T-shirt.jpg" alt="Seminar T-Shirt">
+        <h3>Seminar T-Shirt</h3>
+        <p>Price: RM50</p>
+        <button onclick="addToCart('Seminar T-Shirt', 50)">Add to Cart</button>
+        <a href="product1.html"><button>View</button></a>
+    </div>
+
+    <div class="product">
+        <img src="Notebook.jpg" alt="Kanade Notebook">
+        <h3>Kanade Notebook</h3>
+        <p>Price: RM12</p>
+        <button onclick="addToCart('Kanade Notebook', 12)">Add to Cart</button>
+        <a href="product2.html"><button>View</button></a>
+    </div>
+
+    <div class="product">
+        <img src="Badge.jpg" alt="Yuna-Chan Badge">
+        <h3>Yuna-Chan Badge</h3>
+        <p>Price: RM15</p>
+        <button onclick="addToCart('Yuna-Chan Badge', 15)">Add to Cart</button>
+        <a href="product3.html"><button>View</button></a>
+    </div>
+
+</div>
+
+<script>
+function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name: name, price: price });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(name + " added to cart!");
+}
+</script>
+
+</body>
+</html>
