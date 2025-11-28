@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+    <style>
+        .cart-box {
+            width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .cart-item {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+        }
+
+        .checkout-btn {
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+		.home-btn {
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+    </style>
+</head>
+<body>
+
+<div class="cart-box">
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+
+    <a href="checkout.html" class="checkout-btn">Checkout</a>
+	<a href="index.html" class="home-btn">Turn back</a>
+</div>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartItemsDiv = document.getElementById("cart-items");
+
+    if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+
+        // Show only the LAST 3 items
+        let lastThreeItems = cart.slice(-3);
+
+        lastThreeItems.forEach(item => {
+            cartItemsDiv.innerHTML += `
+                <div class="cart-item">
+                    ${item.productName} (x${item.quantity}) — RM${item.productPrice}
+                </div>
+            `;
+        });
+
+        // If more than 3 items exist, show a notice
+        if (cart.length > 3) {
+            cartItemsDiv.innerHTML += `
+                <p style="color: gray; font-size: 14px; margin-top: 10px;">
+                   
+                </p>
+            `;
+        }
+    }
+	
+</script>
+
+
+</body>
+</html>
