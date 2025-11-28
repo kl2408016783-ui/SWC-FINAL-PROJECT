@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page — Cheer House Official</title>
+    
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fafafa;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* Top menu same as index */
+        .feature {
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .feature a {
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: black;
+            font-weight: bold;
+        }
+
+        /* Admin container */
+        .admin-container {
+            width: 750px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            margin-top: 25px;
+        }
+
+        #product-form input, 
+        #product-form button {
+            display: block;
+            width: 90%;
+            padding: 12px;
+            margin: 10px auto;
+            font-size: 16px;
+        }
+
+        #products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #products-table th, #products-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        #products-table th {
+            background: #f2f2f2;
+        }
+
+        .edit-btn, .delete-btn {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #ffc107;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 17px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h1>Admin Panel — Product Inventory</h1>
+
+    <!-- SAME NAVIGATION BAR LIKE HOMEPAGE -->
+    <div class="feature">
+        <a href="index.html">Home</a>
+        <a href="cart.html">Cart</a>
+        <a href="create_account.html">Account</a>
+        <a href="about_us.html">About Us</a>
+    </div>
+
+    <div class="admin-container">
+
+        <h2>Add / Update Product</h2>
+
+        <form id="product-form">
+            <input type="hidden" id="product-id">
+
+            <input type="text" id="product-name" placeholder="Product Name" required>
+
+            <input type="number" id="price" min="0.01" step="0.01" placeholder="Price (RM)" required>
+
+            <input type="number" id="stock" min="0" placeholder="Stock Quantity" required>
+
+            <button type="submit" id="submit-btn">Add Product</button>
+            <button type="button" id="cancel-btn" style="display:none;">Cancel Edit</button>
+        </form>
+        
+		
+        <h2>Current Products</h2>
+        
+        <table id="products-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price (RM)</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="products-tbody"></tbody>
+			
+        </table>
+        <h2>Customer Orders</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #orders-table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        #orders-table th, #orders-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        #orders-table th {
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        #orders-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        #orders-table tr:hover {
+            background: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<h2></h2>
+
+<table id="orders-table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Product</th>
+            <th>unit Price (RM)</th>
+            <th>Qty</th>
+            <th>Total (RM)</th>
+            <th>Date</th>
+            <th>Payment</th>
+        </tr>
+    </thead>
+    <tbody id="orders-tbody"></tbody>
+</table>
+
+<script>
+    // Get orders from localStorage
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+    const tbody = document.getElementById("orders-tbody");
+
+    if (orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7">No orders found.</td></tr>`;
+    } else {
+        orders.forEach((order, index) => {
+            let row = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${order.productName}</td>
+                    <td>${order.productPrice.toFixed(2)}</td>
+                    <td>${order.quantity}</td>
+                    <td>${order.total}</td>
+                    <td>${order.date}</td>
+                    <td>${order.payment || "N/A"}</td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+    }
+</script>
+
+</body>
+</html>
+
+        <a class="back-btn" href="index.html">⬅ Back to Homepage</a>
+    </div>
+
+<script>
+let products = [
+    { id: 123, name: 'Seminar T-shirt', price: 50.00, stock: 150 },
+    { id: 124, name: 'K Notebook', price: 12.00, stock: 200 },
+    { id: 125, name: 'Yuna Badge', price: 15.00, stock: 120 }
+];
+
+let nextId = 126;
+
+const productsTBody = document.getElementById('products-tbody');
+const productForm = document.getElementById('product-form');
+const submitBtn = document.getElementById('submit-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+
+// RENDER PRODUCTS
+function renderProducts() {
+    productsTBody.innerHTML = '';
+
+    products.forEach(product => {
+        const row = productsTBody.insertRow();
+
+        row.insertCell(0).textContent = product.id;
+        row.insertCell(1).textContent = product.name;
+        row.insertCell(2).textContent = product.price.toFixed(2);
+        row.insertCell(3).textContent = product.stock;
+
+        const actions = row.insertCell(4);
+
+        let editBtn = document.createElement('button');
+        editBtn.className = 'edit-btn';
+        editBtn.textContent = 'Edit';
+        editBtn.onclick = () => loadProductForEdit(product.id);
+
+        let deleteBtn = document.createElement('button');
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.onclick = () => deleteProduct(product.id);
+
+        actions.appendChild(editBtn);
+        actions.appendChild(deleteBtn);
+    });
+}
+// -------------------------
+// VIEW ORDERS FUNCTION
+// -------------------------
+	// -------------------------
+// VIEW ORDERS FUNCTION
+// -------------------------
+function renderOrders() {
+    const ordersTBody = document.getElementById("orders-tbody");
+    let allOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    ordersTBody.innerHTML = "";
+
+    if (allOrders.length === 0) {
+        ordersTBody.innerHTML = `
+            <tr>
+                <td colspan="7" style="color: gray; padding: 15px;">
+                    No orders yet.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    allOrders.forEach((order, index) => {
+        const row = ordersTBody.insertRow();
+
+        row.insertCell(0).textContent = index + 1;
+        row.insertCell(1).textContent = order.productName;
+        row.insertCell(2).textContent = order.productPrice;
+        row.insertCell(3).textContent = order.quantity;
+        row.insertCell(4).textContent = order.total;
+        row.insertCell(5).textContent = order.date;
+        
+    });
+}
+
+// DELETE
+function deleteProduct(id) {
+    if (confirm(`Are you sure you want to delete Product ID ${id}?`)) {
+        products = products.filter(p => p.id !== id);
+        renderProducts();
+    }
+}
+
+// LOAD FOR EDIT
+function loadProductForEdit(id) {
+    const p = products.find(pr => pr.id === id);
+    if (p) {
+        document.getElementById('product-id').value = p.id;
+        document.getElementById('product-name').value = p.name;
+        document.getElementById('price').value = p.price;
+        document.getElementById('stock').value = p.stock;
+
+        submitBtn.textContent = 'Update Product';
+        cancelBtn.style.display = 'inline-block';
+    }
+}
+
+// RESET FORM
+function resetForm() {
+    productForm.reset();
+    document.getElementById('product-id').value = '';
+    submitBtn.textContent = 'Add Product';
+    cancelBtn.style.display = 'none';
+}
+
+cancelBtn.addEventListener('click', resetForm);
+
+// SUBMIT (ADD / UPDATE)
+productForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const idValue = document.getElementById('product-id').value;
+    const name = document.getElementById('product-name').value;
+    const price = parseFloat(document.getElementById('price').value);
+    const stock = parseInt(document.getElementById('stock').value);
+
+    if (idValue) {
+        const id = parseInt(idValue);
+        const index = products.findIndex(p => p.id === id);
+        products[index] = { id, name, price, stock };
+        resetForm();
+    } else {
+        products.push({ id: nextId++, name, price, stock });
+        productForm.reset();
+    }
+
+   
+});
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+    renderOrders();
+});
+
+
+</script>
+
+</body>
+</html>
