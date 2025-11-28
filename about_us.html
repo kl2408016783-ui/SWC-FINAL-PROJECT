@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Us — Anime Merch Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#6b5b95;
+      --muted:#6b7280;
+      --bg:#f7f7fb;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#111827;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:40px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+    }
+    .container{
+      width:100%;
+      max-width:900px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.96));
+      border-radius:14px;
+      box-shadow:0 6px 30px rgba(16,24,40,0.08);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1fr 380px;
+      gap:0;
+    }
+    @media (max-width:880px){
+      .container{grid-template-columns:1fr;}
+      .side{order:2}
+    }
+    .main{
+      padding:36px 40px;
+    }
+    h1{margin:0 0 12px 0;font-size:28px}
+    .lead{color:var(--muted);margin:0 0 18px 0}
+    p{line-height:1.6;margin:0 0 12px}
+    .cta{display:inline-block;margin-top:10px;padding:10px 16px;border-radius:8px;background:var(--accent);color:#fff;text-decoration:none;font-weight:600}
+    .side{
+      background:linear-gradient(180deg, rgba(107,91,149,0.06), rgba(107,91,149,0.02));
+      padding:32px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+    }
+    .avatar{
+      width:140px;height:140px;border-radius:18px;overflow:hidden;flex-shrink:0;
+      box-shadow:0 8px 24px rgba(107,91,149,0.12);
+      background:linear-gradient(135deg,#fff,#f3f4f6);
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .tag{font-weight:700;color:var(--accent)}
+    .small{font-size:13px;color:var(--muted)}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+    .backlink{display:block;margin-top:12px;text-decoration:none;color:var(--accent);font-weight:600}
+    footer{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <main class="container" role="main">
+    <section class="main">
+      <h1>About Us</h1>
+      <p class="lead">Hai! Welcome to our anime merchandise store — a small shop made for fans, by fans.</p>
+
+      <p>We sell a variety of anime-themed items such as shirts, keychains, posters, and accessories. Our goal is to provide high-quality, affordable merchandise and a friendly shopping experience for both teenagers and adult collectors.</p>
+
+      <p>Customer satisfaction is our priority. We strive to describe each product clearly and handle orders carefully so you receive exactly what you expect. If you have questions, feel free to contact us through the contact page (or an email you provide).</p>
+
+      <p>Keep an eye out for promotions — we plan to run occasional discounts and bundle offers for our loyal customers.</p>
+
+      <a class="cta" href="index.html">Browse the Store</a>
+
+    </section>
+
+    <aside class="side" aria-label="About info">
+      <div class="avatar">
+        <!-- Replace the `images/arisu.jpg` with your actual filename. Put the image in the same folder or adjust the path. -->
+        <img src="୨୧ — Arisu.jpeg" alt="Store mascot or sample product image">
+      </div>
+
+      <div class="meta">
+        <div class="tag">Anime Merch Shop</div>
+        <div class="small">Built with care • Friendly service</div>
+      </div>
+
+      <a class="backlink" href="index.html">← Back to store</a>
+    </aside>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Anime Merch Store — All rights reserved.
+  </footer>
+
+  <script>
+    // Set current year and improve accessibility focus order for keyboard users
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // If your original image is in Downloads, move it to the project folder and rename to images/arisu.jpg
+  </script>
+</body>
+</html>
